@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travenor/screens/auth/login_screen.dart';
 import 'package:travenor/screens/onboarding/widgets/on_boarding_widget.dart';
+import 'package:travenor/services/storage_service.dart';
 import 'package:travenor/utils/app_theme.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -51,11 +51,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     coloredText: 'explore',
                   ),
                   OnBoardingWidget(
-                      description:
-                          'To fully embrace your adventure,\nall you have to dois set off and explore wherever\nyour heart desires. We eagerly await your arrival!',
-                      image: 'assets/images/on_boarding_3.png',
-                      title: 'People don’t take trips, trips take',
-                      coloredText: 'people')
+                    description:
+                        'To fully embrace your adventure,\nall you have to dois set off and explore wherever\nyour heart desires. We eagerly await your arrival!',
+                    image: 'assets/images/on_boarding_3.png',
+                    title: 'People don’t take trips, trips take',
+                    coloredText: 'people',
+                  )
                 ],
               ),
             ),
@@ -105,6 +106,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             GestureDetector(
               onTap: () {
                 if (currentPage == 2) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                  StorageService.setNotFirstTime();
                 } else {
                   currentPage++;
                   pageController.animateToPage(

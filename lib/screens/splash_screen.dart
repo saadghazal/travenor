@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:travenor/screens/auth/login_screen.dart';
 import 'package:travenor/screens/onboarding/on_boarding_screen.dart';
+import 'package:travenor/services/storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,13 +14,22 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OnBoardingScreen(),
-        ),
-      );
+    Future.delayed(Duration(seconds: 2), () async {
+      if (await StorageService.isOnBoarding()) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OnBoardingScreen(),
+          ),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+      }
     });
     super.initState();
   }
