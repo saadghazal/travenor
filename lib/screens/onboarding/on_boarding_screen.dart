@@ -4,6 +4,7 @@ import 'package:travenor/screens/auth/login_screen.dart';
 import 'package:travenor/screens/onboarding/widgets/on_boarding_widget.dart';
 import 'package:travenor/services/storage_service.dart';
 import 'package:travenor/utils/app_theme.dart';
+import 'package:travenor/widgets/app_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -29,8 +30,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         top: false,
         child: Column(
           children: [
-            SizedBox(
-              height: 678.h,
+            Flexible(
+              flex: 18,
               child: PageView(
                 controller: pageController,
                 scrollDirection: Axis.horizontal,
@@ -103,43 +104,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ],
             ),
             Spacer(),
-            GestureDetector(
-              onTap: () {
-                if (currentPage == 2) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                    (route) => false,
-                  );
-                  StorageService.setNotFirstTime();
-                } else {
-                  currentPage++;
-                  pageController.animateToPage(
-                    currentPage,
-                    duration: Duration(milliseconds: 250),
-                    curve: Curves.linear,
-                  );
-                  setState(() {});
-                }
-              },
-              child: Container(
-                height: 56.h,
-                width: double.maxFinite,
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
-                  color: AppTheme.mainColor,
-                ),
-                alignment: Alignment.center,
-                child: AppTheme.semiBoldText(
-                  text: currentPage == 2 ? 'Get Started' : 'Next',
-                  size: 16,
-                  textColor: Colors.white,
-                ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: AppButton(
+                onTap: () {
+                  if (currentPage == 2) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                      (route) => false,
+                    );
+                    StorageService.setNotFirstTime();
+                  } else {
+                    currentPage++;
+                    pageController.animateToPage(
+                      currentPage,
+                      duration: Duration(milliseconds: 250),
+                      curve: Curves.linear,
+                    );
+                    setState(() {});
+                  }
+                },
+                label: currentPage == 2 ? 'Get Started' : 'Next',
               ),
-            )
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
           ],
         ),
       ),
