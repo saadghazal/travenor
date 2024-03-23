@@ -1,21 +1,17 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:travenor/screens/auth/sign_up_screen.dart';
 import 'package:travenor/screens/auth/widgets/social_login_widget.dart';
 import 'package:travenor/utils/app_theme.dart';
 import 'package:travenor/widgets/app_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +32,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 92.h,
                       ),
                       AppTheme.semiBoldText(
-                        text: 'Sign in now',
+                        text: 'Sign up now',
                         size: 26,
                       ),
                       SizedBox(
                         height: 12.h,
                       ),
                       AppTheme.regularText(
-                        text: 'Please sign in to continue our app',
+                        text: 'Please fill the details and create account',
                         size: 16,
                         textColor: AppTheme.appGrey,
                       ),
@@ -60,7 +56,32 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: AppTheme.boxBackgroundColor,
                         ),
                         alignment: Alignment.centerLeft,
-                        child: TextField(
+                        child: const TextField(
+                          cursorColor: AppTheme.mainColor,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Name',
+                            hintStyle: TextStyle(
+                              fontFamily: 'SFUI',
+                              color: AppTheme.hintTextColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      Container(
+                        height: 56.h,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14.r),
+                          color: AppTheme.boxBackgroundColor,
+                        ),
+                        alignment: Alignment.centerLeft,
+                        child: const TextField(
                           cursorColor: AppTheme.mainColor,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -85,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: AppTheme.boxBackgroundColor,
                         ),
                         alignment: Alignment.centerLeft,
-                        child: TextField(
+                        child: const TextField(
                           cursorColor: AppTheme.mainColor,
                           obscureText: true,
                           obscuringCharacter: '*',
@@ -107,50 +128,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 16.h,
                       ),
                       Align(
-                        alignment: Alignment.bottomRight,
+                        alignment: Alignment.centerLeft,
                         child: AppTheme.mediumText(
-                          text: 'ForgetPassword?',
-                          size: 14,
-                          textColor: AppTheme.mainOrange,
-                        ),
+                            text: 'Password must be at least 8 characters',
+                            size: 14,
+                            textColor: AppTheme.appGrey),
                       ),
                       SizedBox(
                         height: 40.h,
                       ),
                       AppButton(
                         onTap: () {},
-                        label: 'Sign In',
+                        label: 'Sign Up',
                       ),
                       SizedBox(
                         height: 40.h,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontFamily: 'SFUI',
-                            fontSize: 14.sp,
-                            color: AppTheme.appGrey,
-                          ),
-                          children: [
-                            TextSpan(text: 'Don\'t have an account? '),
-                            TextSpan(
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SignUpScreen(),
-                                    ),
-                                  );
-                                },
-                              text: 'Sign Up',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: AppTheme.mainOrange,
-                              ),
-                            )
-                          ],
-                        ),
                       ),
                       SizedBox(
                         height: 20.h,
@@ -163,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                SocialLoginWidget(),
+                const SocialLoginWidget(),
                 SizedBox(
                   height: 10.h,
                 )
