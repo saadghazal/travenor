@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travenor/screens/auth/sign_up_screen.dart';
 import 'package:travenor/screens/auth/widgets/social_login_widget.dart';
 import 'package:travenor/utils/app_theme.dart';
 import 'package:travenor/widgets/app_button.dart';
+
+import '../../widgets/app_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +16,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,58 +61,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 40.h,
                       ),
-                      Container(
-                        height: 56.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.r),
-                          color: AppTheme.boxBackgroundColor,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: TextField(
-                          cursorColor: AppTheme.mainColor,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Email',
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFUI',
-                              color: AppTheme.hintTextColor,
-                            ),
-                          ),
-                        ),
+                      AppTextField(
+                        label: 'Email',
+                        controller: emailController,
                       ),
                       SizedBox(
                         height: 24.h,
                       ),
-                      Container(
-                        height: 56.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.r),
-                          color: AppTheme.boxBackgroundColor,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: TextField(
-                          cursorColor: AppTheme.mainColor,
-                          obscureText: true,
-                          obscuringCharacter: '*',
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Password',
-                            suffixIcon: Icon(
-                              Icons.visibility_off_rounded,
-                              color: AppTheme.hintTextColor,
-                            ),
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFUI',
-                              color: AppTheme.hintTextColor,
-                            ),
-                          ),
-                        ),
+                      AppTextField(
+                        label: 'Password',
+                        controller: passwordController,
+                        isPassword: true,
                       ),
                       SizedBox(
                         height: 16.h,

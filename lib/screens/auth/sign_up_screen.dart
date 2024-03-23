@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travenor/screens/auth/widgets/social_login_widget.dart';
 import 'package:travenor/utils/app_theme.dart';
 import 'package:travenor/widgets/app_button.dart';
+import 'package:travenor/widgets/app_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,6 +13,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,83 +60,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         height: 40.h,
                       ),
-                      Container(
-                        height: 56.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.r),
-                          color: AppTheme.boxBackgroundColor,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: const TextField(
-                          cursorColor: AppTheme.mainColor,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Name',
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFUI',
-                              color: AppTheme.hintTextColor,
-                            ),
-                          ),
-                        ),
-                      ),
+                      AppTextField(label: 'Name', controller: nameController),
                       SizedBox(
                         height: 24.h,
                       ),
-                      Container(
-                        height: 56.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.r),
-                          color: AppTheme.boxBackgroundColor,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: const TextField(
-                          cursorColor: AppTheme.mainColor,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Email',
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFUI',
-                              color: AppTheme.hintTextColor,
-                            ),
-                          ),
-                        ),
-                      ),
+                      AppTextField(label: 'Email', controller: emailController),
                       SizedBox(
                         height: 24.h,
                       ),
-                      Container(
-                        height: 56.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14.r),
-                          color: AppTheme.boxBackgroundColor,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: const TextField(
-                          cursorColor: AppTheme.mainColor,
-                          obscureText: true,
-                          obscuringCharacter: '*',
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Password',
-                            suffixIcon: Icon(
-                              Icons.visibility_off_rounded,
-                              color: AppTheme.hintTextColor,
-                            ),
-                            hintStyle: TextStyle(
-                              fontFamily: 'SFUI',
-                              color: AppTheme.hintTextColor,
-                            ),
-                          ),
-                        ),
+                      AppTextField(
+                        label: 'Password',
+                        controller: passwordController,
+                        isPassword: true,
                       ),
                       SizedBox(
                         height: 16.h,
@@ -130,9 +79,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: AppTheme.mediumText(
-                            text: 'Password must be at least 8 characters',
-                            size: 14,
-                            textColor: AppTheme.appGrey),
+                          text: 'Password must be at least 8 characters',
+                          size: 14,
+                          textColor: AppTheme.appGrey,
+                        ),
                       ),
                       SizedBox(
                         height: 40.h,
