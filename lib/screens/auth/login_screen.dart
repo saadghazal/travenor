@@ -6,7 +6,9 @@ import 'package:travenor/screens/auth/widgets/social_login_widget.dart';
 import 'package:travenor/utils/app_theme.dart';
 import 'package:travenor/widgets/app_button.dart';
 
+import '../../utils/routing_animation.dart';
 import '../../widgets/app_text_field.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -78,10 +80,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: AppTheme.mediumText(
-                          text: 'ForgetPassword?',
-                          size: 14,
-                          textColor: AppTheme.mainOrange,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              RoutingAnimation.downToUp(
+                                screen: ForgotPasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: AppTheme.mediumText(
+                            text: 'Forget Password?',
+                            size: 14,
+                            textColor: AppTheme.mainOrange,
+                          ),
                         ),
                       ),
                       SizedBox(

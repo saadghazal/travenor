@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travenor/screens/auth/widgets/social_login_widget.dart';
@@ -43,7 +44,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 92.h,
+                        height: 8.h,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: AppTheme.boxBackgroundColor,
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              size: 18.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40.h,
                       ),
                       AppTheme.semiBoldText(
                         text: 'Sign up now',
